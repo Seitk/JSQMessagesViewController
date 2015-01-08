@@ -42,6 +42,15 @@
 - (UIImage *)avatarImage;
 
 /**
+ *  @return The avatar image URL for a async image loading.
+ *
+ *  @discussion You may return `nil` from this method while the image is being downloaded.
+ */
+- (NSString *)avatarImageUrl;
+- (UIImage *)placeholderImage;
+- (UIImage *)defaultImage;
+
+/**
  *  @return The avatar image for a highlighted display state. 
  *  
  *  @discussion You may return `nil` from this method if this does not apply.

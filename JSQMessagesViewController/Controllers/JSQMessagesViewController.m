@@ -41,7 +41,7 @@
 #import "NSString+JSQMessages.h"
 #import "UIColor+JSQMessages.h"
 #import "UIDevice+JSQMessages.h"
-
+#import "UIImageView+WebCache.h"
 
 static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObservingContext;
 
@@ -447,8 +447,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     NSString *cellIdentifier = nil;
     if (isMediaMessage) {
         cellIdentifier = isOutgoingMessage ? self.outgoingMediaCellIdentifier : self.incomingMediaCellIdentifier;
-    }
-    else {
+    } else {
         cellIdentifier = isOutgoingMessage ? self.outgoingCellIdentifier : self.incomingCellIdentifier;
     }
     
@@ -483,15 +482,25 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     if (needsAvatar) {
         avatarImageDataSource = [collectionView.dataSource collectionView:collectionView avatarImageDataForItemAtIndexPath:indexPath];
         if (avatarImageDataSource != nil) {
+            NSString *avatarUrl = [avatarImageDataSource respondsToSelector:@selector(avatarImageUrl)] ? [avatarImageDataSource avatarImageUrl] : nil;
+            UIImage *placeholderImage = [avatarImageDataSource respondsToSelector:@selector(placeholderImage)] ? [avatarImageDataSource placeholderImage] : nil;
+            UIImage *defaultImage = [avatarImageDataSource respondsToSelector:@selector(defaultImage)] ? [avatarImageDataSource defaultImage] : nil;
             
-            UIImage *avatarImage = [avatarImageDataSource avatarImage];
-            if (avatarImage == nil) {
-                cell.avatarImageView.image = [avatarImageDataSource avatarPlaceholderImage];
-                cell.avatarImageView.highlightedImage = nil;
-            }
-            else {
-                cell.avatarImageView.image = avatarImage;
-                cell.avatarImageView.highlightedImage = [avatarImageDataSource avatarHighlightedImage];
+            if (avatarUrl && ![avatarUrl isEqualToString:@""]) {
+                [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:avatarUrl] placeholderImage:placeholderImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                    if (error != nil) {
+                        [cell.avatarImageView setImage:defaultImage];
+                    }
+                }];
+            } else {
+                UIImage *avatarImage = [avatarImageDataSource avatarImage];
+                if (avatarImage == nil) {
+                    cell.avatarImageView.image = [avatarImageDataSource avatarPlaceholderImage];
+                    cell.avatarImageView.highlightedImage = nil;
+                } else {
+                    cell.avatarImageView.image = avatarImage;
+                    cell.avatarImageView.highlightedImage = [avatarImageDataSource avatarHighlightedImage];
+                }
             }
         }
     }
