@@ -240,7 +240,9 @@
     }
     
     [self jsq_updateConstraint:self.avatarContainerViewWidthConstraint withConstant:avatarViewSize.width];
-    [self jsq_updateConstraint:self.avatarContainerViewHeightConstraint withConstant:avatarViewSize.height];
+    [self jsq_updateConstraint:self.avatarContainerViewHeightConstraint withConstant:avatarViewSize.width];
+    
+    self.avatarImageView.layer.cornerRadius = avatarViewSize.width / 2;
 }
 
 - (void)setTextViewFrameInsets:(UIEdgeInsets)textViewFrameInsets
