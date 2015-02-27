@@ -73,6 +73,7 @@
     _typingIndicatorEllipsisColor = [_typingIndicatorMessageBubbleColor jsq_colorByDarkeningColorWithValue:0.3f];
 
     _loadEarlierMessagesHeaderTextColor = [UIColor jsq_messageBubbleBlueColor];
+    _loadEarlierMessagesHeaderFont = [UIFont systemFontOfSize:13.0f];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout
@@ -114,6 +115,7 @@
                                                                              withReuseIdentifier:[JSQMessagesLoadEarlierHeaderView headerReuseIdentifier]
                                                                                     forIndexPath:indexPath];
 
+    headerView.loadButton.titleLabel.font = self.loadEarlierMessagesHeaderFont;
     headerView.loadButton.tintColor = self.loadEarlierMessagesHeaderTextColor;
     headerView.delegate = self;
 

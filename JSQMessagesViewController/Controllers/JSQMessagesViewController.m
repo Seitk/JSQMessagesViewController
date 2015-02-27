@@ -119,6 +119,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)jsq_configureMessagesViewController
 {
     self.view.backgroundColor = [UIColor whiteColor];
+    self.collectionView.backgroundColor = [UIColor clearColor];
     
     self.jsq_isObserving = NO;
     
@@ -486,6 +487,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
             UIImage *placeholderImage = [avatarImageDataSource respondsToSelector:@selector(placeholderImage)] ? [avatarImageDataSource placeholderImage] : nil;
             UIImage *defaultImage = [avatarImageDataSource respondsToSelector:@selector(defaultImage)] ? [avatarImageDataSource defaultImage] : nil;
             
+            // TODO: Fix
             if (avatarUrl && ![avatarUrl isEqualToString:@""]) {
                 [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:avatarUrl] placeholderImage:placeholderImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                     if (error != nil) {

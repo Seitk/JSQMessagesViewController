@@ -46,6 +46,7 @@
  *
  *  @discussion You may return `nil` from this method while the image is being downloaded.
  */
+@optional
 - (NSString *)avatarImageUrl;
 - (UIImage *)placeholderImage;
 - (UIImage *)defaultImage;

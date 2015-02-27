@@ -94,7 +94,7 @@
     
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor clearColor];
     
     self.cellTopLabelHeightConstraint.constant = 0.0f;
     self.messageBubbleTopLabelHeightConstraint.constant = 0.0f;
@@ -103,10 +103,10 @@
     self.avatarViewSize = CGSizeZero;
     
     self.cellTopLabel.textAlignment = NSTextAlignmentCenter;
-    self.cellTopLabel.font = [UIFont boldSystemFontOfSize:12.0f];
-    self.cellTopLabel.textColor = [UIColor lightGrayColor];
+    self.cellTopLabel.font = ANDemiBold(13.0f);
+    self.cellTopLabel.textColor = [UIColor blackColor];
     
-    self.messageBubbleTopLabel.font = [UIFont systemFontOfSize:12.0f];
+    self.messageBubbleTopLabel.font = ANDemiBold(12.0f);
     self.messageBubbleTopLabel.textColor = [UIColor lightGrayColor];
     
     self.cellBottomLabel.font = [UIFont systemFontOfSize:11.0f];
@@ -239,10 +239,10 @@
         return;
     }
     
-    [self jsq_updateConstraint:self.avatarContainerViewWidthConstraint withConstant:avatarViewSize.width];
-    [self jsq_updateConstraint:self.avatarContainerViewHeightConstraint withConstant:avatarViewSize.width];
+    [self jsq_updateConstraint:self.avatarContainerViewWidthConstraint withConstant:avatarViewSize.height];
+    [self jsq_updateConstraint:self.avatarContainerViewHeightConstraint withConstant:avatarViewSize.height];
     
-    self.avatarImageView.layer.cornerRadius = avatarViewSize.width / 2;
+    self.avatarImageView.layer.cornerRadius = avatarViewSize.height / 2;
 }
 
 - (void)setTextViewFrameInsets:(UIEdgeInsets)textViewFrameInsets

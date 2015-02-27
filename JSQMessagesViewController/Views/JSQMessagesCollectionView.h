@@ -77,6 +77,8 @@
  */
 @property (strong, nonatomic) UIColor *loadEarlierMessagesHeaderTextColor;
 
+@property (strong, nonatomic) UIFont *loadEarlierMessagesHeaderFont;
+
 /**
  *  Returns a `JSQMessagesTypingIndicatorFooterView` object for the specified index path
  *  that is configured using the collection view's properties:
